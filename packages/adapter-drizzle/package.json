@@ -1,0 +1,53 @@
+{
+  "name": "@next-auth/drizzle-adapter",
+  "version": "0.0.1",
+  "description": "Drizzle adapter for next-auth.",
+  "homepage": "https://authjs.dev",
+  "repository": "https://github.com/nextauthjs/next-auth",
+  "bugs": {
+    "url": "https://github.com/nextauthjs/next-auth/issues"
+  },
+  "author": "Anthony Shew",
+  "main": "dist/index.js",
+  "license": "ISC",
+  "keywords": [
+    "next-auth",
+    "next.js",
+    "oauth",
+    "drizzle"
+  ],
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm ./prisma/dev.db* || echo 'File deleted'",
+    "test:init": "drizzle-kit generate:sqlite --schema=src/schema.ts",
+    "test": "pnpm test:init && jest",
+    "build": "drizzle-kit generate:sqlite --schema=src/schema.ts && tsc",
+    "dev": "drizzle-kit generate:sqlite --schema=src/schema.ts && tsc -w"
+  },
+  "files": [
+    "README.md",
+    "dist"
+  ],
+  "peerDependencies": {
+    "@prisma/client": ">=2.26.0 || >=3",
+    "next-auth": "^4"
+  },
+  "devDependencies": {
+    "@next-auth/adapter-test": "workspace:*",
+    "@next-auth/tsconfig": "workspace:*",
+    "@types/better-sqlite3": "^7.6.3",
+    "drizzle-kit": "^0.17.3",
+    "drizzle-orm": "^0.23.5",
+    "jest": "^27.4.3",
+    "next-auth": "workspace:*"
+  },
+  "jest": {
+    "preset": "@next-auth/adapter-test/jest"
+  },
+  "dependencies": {
+    "better-sqlite3": "^8.2.0"
+  }
+}
